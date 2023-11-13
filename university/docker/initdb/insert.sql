@@ -3,7 +3,8 @@ INSERT INTO university.group (number)
 VALUES
     (21211),
     (21212),
-    (21213);
+    (21213),
+    (21214);
 
 /* STUDENT */
 INSERT INTO university.student (first_name, middle_name, last_name, average_score, number_phone, number_group)

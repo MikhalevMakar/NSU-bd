@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Student Form</title>
+    <!-- Add your stylesheet links or CDN here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wyjt9Qn1YI83z1Ob+X41X6h1LJH1xIYbG"
+          crossorigin="anonymous"/>
+    <style>
+        body {
+            background-image: url('https://source.unsplash.com/random'); /* Задний фон */
+            background-size: cover; /* Заполнение всего экрана */
+            background-position: center; /* Центрирование фона */
+            color: #ffffff; /* Цвет текста */
+        }
+
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Прозрачный фон контейнера */
+            border-radius: 10px; /* Скругление углов контейнера */
+            padding: 20px; /* Внутренний отступ контейнера */
+            margin-top: 50px; /* Отступ сверху */
+        }
+
+        form {
+            margin-top: 20px; /* Отступ сверху для формы */
+        }
+
+        button {
+            background-color: #007bff; /* Цвет кнопки */
+        }
+
+        body {
+            background-image: url('https://source.unsplash.com/random');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 15px; /* Увеличьте радиус закругления формочек */
+            background-color: #f8f9fa; /* Цвет фона формочек */
+            color: #495057; /* Цвет текста в формочках */
+        }
+
+        button {
+            background-color: #007bff;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center">Student Form</h2>
+    <form th:action="@{/saveStudent}" th:object="${student}" method="post">
+        <!-- Id field (hidden for new student) -->
+        <input type="hidden" th:field="*{id}"/>
+
+        <!-- First Name -->
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required/>
+        </div>
+
+        <!-- Middle Name -->
+        <div class="form-group">
+            <label for="middleName">Middle Name:</label>
+            <input type="text" class="form-control" id="middleName" th:field="*{middleName}" required/>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required/>
+        </div>
+
+        <!-- Average Score -->
+        <div class="form-group">
+            <label for="averageScore">Average Score:</label>
+            <input type="number" class="form-control" id="averageScore" th:field="*{averageScore}" required/>
+        </div>
+
+        <!-- Number Phone -->
+        <div class="form-group">
+            <label for="numberPhone">Number Phone:</label>
+            <input type="text" class="form-control" id="numberPhone" th:field="*{numberPhone}" required/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"
+        integrity="sha384-P2v5Vc8M5st01F0xjStNAZHeqrF5hP1a8eKM3HXV+q13fZxYMjWV0Nv7SuJ9YoiG"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wyjt9Qn1YI83z1Ob+X41X6h1LJH1xIYbG"
+        crossorigin="anonymous"></script>
+</body>
+</html>

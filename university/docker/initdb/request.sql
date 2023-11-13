@@ -6,7 +6,9 @@ SELECT * FROM university.student
 SELECT university.student.* from university.student
 INNER JOIN university.schedule
 ON university.student.number_group=university.schedule.group_id
-WHERE university.schedule.teacher_id = 1;
+INNER JOIN university.teacher
+ON university.teacher.id=university.schedule.teacher_id
+WHERE university.teacher.first_name='Сидоров';
 
 /* Вывести расписание преподавателя */
 SELECT
@@ -57,3 +59,8 @@ FROM university.group
 JOIN university.student
 ON university.group.number=university.student.number_group
 GROUP BY(university.group.number);
+
+SELECT university.group.number AS number_group
+FROM university.group
+WHERE EXISTS (SELECT * from university.group_leader
+              WHERE university.group.number=university.group_leader.group_id);

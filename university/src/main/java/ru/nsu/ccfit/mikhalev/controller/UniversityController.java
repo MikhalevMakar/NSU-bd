@@ -1,15 +1,23 @@
 package ru.nsu.ccfit.mikhalev.controller;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.nsu.ccfit.mikhalev.dao.entity.Student;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+@Slf4j
 @Validated
-@RestController
-@RequestMapping(value = "/digital_library", produces = APPLICATION_JSON_VALUE)
+@Controller
+@RequestMapping(value = "/")
 public class UniversityController {
 
-
-
+    @GetMapping
+    public String showStudentForm(Model model) {
+        log.info("show student form");
+        model.addAttribute("student", new Student());
+        return "student-form";
+    }
 }
