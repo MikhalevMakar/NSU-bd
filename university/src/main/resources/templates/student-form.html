@@ -3,39 +3,16 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Student Form</title>
-    <!-- Add your stylesheet links or CDN here -->
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wyjt9Qn1YI83z1Ob+X41X6h1LJH1xIYbG"
           crossorigin="anonymous"/>
     <style>
         body {
-            background-image: url('https://source.unsplash.com/random'); /* Задний фон */
-            background-size: cover; /* Заполнение всего экрана */
-            background-position: center; /* Центрирование фона */
-            color: #ffffff; /* Цвет текста */
-        }
-
-
-        .container {
-            background-color: rgba(255, 255, 255, 0.8); /* Прозрачный фон контейнера */
-            border-radius: 10px; /* Скругление углов контейнера */
-            padding: 20px; /* Внутренний отступ контейнера */
-            margin-top: 50px; /* Отступ сверху */
-        }
-
-        form {
-            margin-top: 20px; /* Отступ сверху для формы */
-        }
-
-        button {
-            background-color: #007bff; /* Цвет кнопки */
-        }
-
-        body {
-            background-image: url('https://source.unsplash.com/random');
+            background-image: url('https://klike.net/uploads/posts/2022-08/1660804779_3-24.jpg');
             background-size: cover;
             background-position: center;
-            color: #ffffff;
+            color: #000000; /* Черный цвет текста */
         }
 
         .container {
@@ -43,6 +20,7 @@
             border-radius: 10px;
             padding: 20px;
             margin-top: 50px;
+            color: #000000; /* Черный цвет текста */
         }
 
         form {
@@ -54,56 +32,65 @@
         }
 
         .form-control {
-            border-radius: 15px; /* Увеличьте радиус закругления формочек */
-            background-color: #f8f9fa; /* Цвет фона формочек */
-            color: #495057; /* Цвет текста в формочках */
+            border-radius: 15px;
+            background-color: #f2f2f2;
+            color: #000000; /* Черный цвет текста в полях ввода */
         }
 
         button {
             background-color: #007bff;
             border-radius: 15px;
         }
+
+        /* Цвет текста для алертов (успешно/неудачно) */
+        .alert {
+            color: #000000; /* Черный цвет текста в алертах */
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2 class="text-center">Student Form</h2>
-    <form th:action="@{/saveStudent}" th:object="${student}" method="post">
-        <!-- Id field (hidden for new student) -->
-        <input type="hidden" th:field="*{id}"/>
+    <h2 class="text-center">Форма студента</h2>
 
-        <!-- First Name -->
+    <div th:if="${status}">
+        <div th:class="${status == 'success' ? 'alert alert-success' : 'alert alert-danger'}" role="alert">
+            ${status == 'success' ? 'Студент успешно добавлен!' : 'Не удалось добавить студента. Пожалуйста, повторите попытку.'}
+        </div>
+    </div>
+
+    <form th:action="@{/university/save-student}" th:object="${student}" method="post">
         <div class="form-group">
-            <label for="firstName">First Name:</label>
+            <label for="firstName">Имя:</label>
             <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required/>
         </div>
 
-        <!-- Middle Name -->
         <div class="form-group">
-            <label for="middleName">Middle Name:</label>
+            <label for="middleName">Отчество:</label>
             <input type="text" class="form-control" id="middleName" th:field="*{middleName}" required/>
         </div>
 
-        <!-- Last Name -->
         <div class="form-group">
-            <label for="lastName">Last Name:</label>
+            <label for="lastName">Фамилия:</label>
             <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required/>
         </div>
 
-        <!-- Average Score -->
         <div class="form-group">
-            <label for="averageScore">Average Score:</label>
+            <label for="averageScore">Средний балл:</label>
             <input type="number" class="form-control" id="averageScore" th:field="*{averageScore}" required/>
         </div>
 
-        <!-- Number Phone -->
         <div class="form-group">
-            <label for="numberPhone">Number Phone:</label>
+            <label for="numberPhone">Номер телефона:</label>
             <input type="text" class="form-control" id="numberPhone" th:field="*{numberPhone}" required/>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-group">
+            <label for="numberGroup">Номер группы:</label>
+            <input type="text" class="form-control" id="numberGroup" th:field="*{numberGroup}" required/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Отправить</button>
     </form>
 </div>
 

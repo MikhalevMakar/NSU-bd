@@ -6,6 +6,8 @@ import lombok.*;
 import org.hibernate.annotations.Check;
 
 import java.math.BigDecimal;
+import java.util.Set;
+
 import lombok.experimental.FieldDefaults;
 import static ru.nsu.ccfit.mikhalev.context.ValidationEntityContext.*;
 
@@ -44,4 +46,7 @@ public class Student {
     @Check(constraints =  "number_phone ~ '^[0-9]{11}$'")
     @Column(name = "number_phone", nullable = false, length = SIZE_NUMBER_PHONE)
     private String numberPhone;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Group group;
 }

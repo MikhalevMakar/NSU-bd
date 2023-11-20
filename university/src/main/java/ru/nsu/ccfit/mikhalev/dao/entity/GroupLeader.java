@@ -1,7 +1,6 @@
 package ru.nsu.ccfit.mikhalev.dao.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

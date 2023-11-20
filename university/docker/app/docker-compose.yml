@@ -10,12 +10,3 @@ services:
     ports:
       - "5433:5432"
     restart: always
-  redis:
-    image: 'bitnami/redis:latest'
-    environment:
-      - REDIS_USERNAME=back
-      - REDIS_PASSWORD=back
-    command: redis-server --requirepass back
-    ports:
-      - "6379:6379"
-    restart: always

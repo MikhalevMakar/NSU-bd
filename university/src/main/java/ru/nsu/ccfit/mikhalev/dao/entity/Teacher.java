@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import static ru.nsu.ccfit.mikhalev.context.ValidationEntityContext.*;
@@ -14,7 +15,7 @@ import static ru.nsu.ccfit.mikhalev.context.ValidationEntityContext.*;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "teacher", schema = "university",
-    uniqueConstraints = @UniqueConstraint(columnNames = {"first_name", "middle_name", "last_name"}))
+       uniqueConstraints = @UniqueConstraint(columnNames = {"first_name", "middle_name", "last_name"}))
 @Entity
 public class Teacher {
 
@@ -35,15 +36,9 @@ public class Teacher {
     @Column(name = "last_name", nullable = false, length = MAX_SIZE_LAST_NAME)
     private String lastName;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "teacher_degree",
                joinColumns = @JoinColumn(name = "teacher_id"), schema = "university",
                inverseJoinColumns = @JoinColumn(name = "degree_id"))
-    private Set<DegreeEducation> degreeEducation;
+    private Set<DegreeEducation> degreeEducation = new HashSet<>();
 }
-
-
-
-
-
-

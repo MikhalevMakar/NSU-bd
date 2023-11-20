@@ -11,14 +11,11 @@ import static ru.nsu.ccfit.mikhalev.context.ValidationEntityContext.SIZE_VALID_G
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-@Table(name = "group", schema = "university")
+@Table(name = "group_number", schema = "university")
 public class Group {
 
     @Id
     @Size(min = SIZE_VALID_GROUP, max = SIZE_VALID_GROUP,
           message = "api-university.exception.constraints.description")
     private Long number;
-
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private Schedule schedule;
 }

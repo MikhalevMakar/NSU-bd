@@ -8,10 +8,10 @@ import java.util.Set;
 
 import static ru.nsu.ccfit.mikhalev.context.ValidationEntityContext.MAX_SIZE_DEGREE;
 
-
 @Data
-
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "degree_education", schema = "university")
 @Entity
