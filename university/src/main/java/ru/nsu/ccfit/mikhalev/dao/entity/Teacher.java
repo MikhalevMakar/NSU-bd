@@ -11,8 +11,9 @@ import java.util.Set;
 
 import static ru.nsu.ccfit.mikhalev.context.ValidationEntityContext.*;
 
-@Data
-@NoArgsConstructor
+@Setter
+@Getter
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "teacher", schema = "university",
        uniqueConstraints = @UniqueConstraint(columnNames = {"first_name", "middle_name", "last_name"}))

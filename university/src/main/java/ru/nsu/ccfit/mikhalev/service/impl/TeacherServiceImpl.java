@@ -7,11 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nsu.ccfit.mikhalev.dao.entity.Teacher;
 import ru.nsu.ccfit.mikhalev.dao.repository.TeacherRepository;
-import ru.nsu.ccfit.mikhalev.dto.ScheduleDto;
-import ru.nsu.ccfit.mikhalev.dto.TeacherDto;
-import ru.nsu.ccfit.mikhalev.exception.UserExistsException;
+import ru.nsu.ccfit.mikhalev.dto.*;
+import ru.nsu.ccfit.mikhalev.exception.*;
 import ru.nsu.ccfit.mikhalev.mapper.TeacherMapper;
 import ru.nsu.ccfit.mikhalev.service.*;
+
+import java.util.List;
 
 @Slf4j
 @AllArgsConstructor
@@ -31,16 +32,34 @@ public class TeacherServiceImpl implements TeacherService {
         log.info("save new teacher");
         this.checkIfTeacherExists(teacherDto);
         Teacher teacher = teacherMapper.mapToEntity(teacherDto);
+
         teacher.getDegreeEducation()
-            .add(degreeService.findOrCreateDegree(teacherDto.degree()));
+               .add(degreeService.findOrCreateDegree(teacherDto.degree()));
         teacherRepository.save(teacher);
     }
 
+
+    @Override
     @Transactional(readOnly = true)
-    public Teacher findTeacher(ScheduleDto scheduleDto) throws UserExistsException {
-        return teacherRepository.findTeacherByLessonDelivery(scheduleDto.lastName(), scheduleDto.middleName(),
-                                                             scheduleDto.firstName(), scheduleDto.lessonDelivery())
-                                 .orElseThrow(UserExistsException::new);
+    public Teacher findTeacherDelivery(ScheduleDto scheduleDto) throws UserNotFoundException {
+
+        if(teacherRepository.exitLessonDelivery(scheduleDto.lastName(),
+                                                scheduleDto.middleName(),
+                                                scheduleDto.firstName(),
+                                                scheduleDto.lessonDelivery()))
+            throw new UserNotFoundException();
+
+        return teacherRepository.findByFullName(scheduleDto.lastName(),
+                                                scheduleDto.middleName(),
+                                                scheduleDto.firstName())
+                                .orElseThrow(UserNotFoundException::new);
+    }
+
+    @Override
+    public List<TeacherDto> listTeachers() {
+        return teacherRepository.findAllTeacher().stream()
+                                                 .map(teacherMapper::mapToDto)
+                                                 .toList();
     }
 
     private void checkIfTeacherExists(TeacherDto teacherDto) throws UserExistsException {

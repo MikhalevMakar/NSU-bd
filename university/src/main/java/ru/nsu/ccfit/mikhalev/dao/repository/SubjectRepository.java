@@ -9,11 +9,9 @@ import java.util.Optional;
 
 public interface SubjectRepository extends CrudRepository<Subject, Long> {
 
-    @Query(value = """ 
-                    SELECT s FROM university.subject AS s
-                    WHERE 
-                    university.subject.title = :title
-           """,
-           nativeQuery = true)
-    Optional<Subject> findByTitle(@Param(value = "title") String title);
+    @Query(value = """
+                    SELECT * FROM university.subject AS s
+                    WHERE s.title ILIKE '%' ||  :title || '%'
+          """, nativeQuery = true)
+    Optional<Subject> findByTitle(@Param("title") String title);
 }

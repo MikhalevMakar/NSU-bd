@@ -9,10 +9,10 @@ import java.util.Set;
 
 import static ru.nsu.ccfit.mikhalev.context.ValidationEntityContext.*;
 
-@Data
+@Getter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name="subject", schema = "university")
 @Entity
@@ -26,6 +26,6 @@ public class Subject {
     @Column(nullable = false, length = MAX_SIZE_SUBJECT)
     private String title;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.PERSIST)
     private Set<Schedule> schedule;
 }

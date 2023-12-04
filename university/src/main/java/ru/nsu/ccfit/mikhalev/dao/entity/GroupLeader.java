@@ -7,7 +7,6 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = {"student", "group"})
-@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "group_leader", schema = "university")
 @Entity

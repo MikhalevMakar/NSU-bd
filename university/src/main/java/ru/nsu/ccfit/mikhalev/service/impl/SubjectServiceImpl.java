@@ -17,7 +17,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Transactional
     public Subject findOrCreateSubject(String subject) {
-        return this.subjectRepository.findByTitle (subject)
+        return this.subjectRepository.findByTitle(subject)
             .orElse(Subject.builder()
                             .title(subject)
                             .build());

@@ -1,18 +1,11 @@
 package ru.nsu.ccfit.mikhalev.mapper;
 
-import lombok.AllArgsConstructor;
-import org.mapstruct.Context;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
-import org.springframework.beans.factory.annotation.Autowired;
-import ru.nsu.ccfit.mikhalev.dao.entity.Group;
-import ru.nsu.ccfit.mikhalev.dao.entity.Schedule;
+import org.mapstruct.*;
+import ru.nsu.ccfit.mikhalev.dao.entity.*;
 import ru.nsu.ccfit.mikhalev.dao.repository.GroupRepository;
 import ru.nsu.ccfit.mikhalev.dto.ScheduleDto;
 
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Mapper
@@ -28,4 +21,5 @@ public interface ScheduleMapper {
             .filter(Objects::nonNull)
             .collect(Collectors.toSet());
     }
+
 }

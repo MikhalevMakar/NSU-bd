@@ -9,29 +9,27 @@ import java.util.Set;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@EqualsAndHashCode(exclude = {"group", "subject", "teacher"})
+@RequiredArgsConstructor
+@EqualsAndHashCode(exclude = {"groups", "subject", "teacher"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name="schedule", schema = "university")
 @Entity
 public class Schedule {
 
-    @EmbeddedId
-    private ScheduleId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    private Long id;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private Set<Group> groups;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "subject_id", referencedColumnName = "id", nullable = false,
-                insertable = false, updatable = false,
-                foreignKey = @ForeignKey(name = "subject_id"))
-        private Subject subject;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    private Subject subject;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacher_id", referencedColumnName = "id", nullable = false,
-                insertable = false, updatable = false,
-                foreignKey = @ForeignKey(name = "teacher_id"))
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, orphanRemoval = true)
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private Teacher teacher;
 
     @Column(name = "lesson_delivery", nullable = false)

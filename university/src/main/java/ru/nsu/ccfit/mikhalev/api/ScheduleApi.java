@@ -2,7 +2,7 @@ package ru.nsu.ccfit.mikhalev.api;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.nsu.ccfit.mikhalev.dto.ScheduleDto;
+import ru.nsu.ccfit.mikhalev.dto.*;
 import ru.nsu.ccfit.mikhalev.exception.UserExistsException;
 
 import static ru.nsu.ccfit.mikhalev.configuration.PathApi.*;
@@ -14,4 +14,7 @@ public interface ScheduleApi {
 
     @PostMapping(PART_PATH_SAVE_SCHEDULE)
     String save(@ModelAttribute(PART_PATH_SAVE_SCHEDULE) ScheduleDto scheduleDto) throws UserExistsException;
+
+    @PostMapping(PART_PATH_TEACHER_SCHEDULE)
+    String teacherSchedule(Model model, TeacherDto teacher);
 }

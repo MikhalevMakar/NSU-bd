@@ -10,6 +10,8 @@ import ru.nsu.ccfit.mikhalev.dto.TeacherDto;
 import ru.nsu.ccfit.mikhalev.exception.UserExistsException;
 import ru.nsu.ccfit.mikhalev.service.TeacherService;
 
+import java.util.List;
+
 import static ru.nsu.ccfit.mikhalev.configuration.ApiHtml.*;
 
 @Slf4j
@@ -31,5 +33,11 @@ public class TeacherController implements TeacherApi {
     public String saveTeacher(TeacherDto teacher) throws UserExistsException {
         teacherService.save(teacher);
         return HTML_REDIRECT_TEACHER;
+    }
+
+    @Override
+    public String listTeacher(Model model) {
+        model.addAttribute("teachers", teacherService.listTeachers());
+        return HTML_LIST_TEACHER;
     }
 }

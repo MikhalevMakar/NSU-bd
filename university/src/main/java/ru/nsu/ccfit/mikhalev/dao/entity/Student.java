@@ -14,7 +14,6 @@ import static ru.nsu.ccfit.mikhalev.context.ValidationEntityContext.*;
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = {"numberPhone", "averageScore"})
-@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "student",

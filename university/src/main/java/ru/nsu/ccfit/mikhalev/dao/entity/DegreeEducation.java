@@ -8,7 +8,7 @@ import java.util.Set;
 
 import static ru.nsu.ccfit.mikhalev.context.ValidationEntityContext.MAX_SIZE_DEGREE;
 
-@Data
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

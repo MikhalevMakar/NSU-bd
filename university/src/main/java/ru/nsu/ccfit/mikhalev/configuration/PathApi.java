@@ -16,5 +16,9 @@ public class PathApi {
 
     public static final String PART_PATH_SAVE_TEACHER = "save-teacher";
 
+    public static final String PART_PATH_TEACHERS = "teachers";
+
+    public static final String PART_PATH_TEACHER_SCHEDULE = "teacher-schedule";
+
 
 }

@@ -9,3 +9,5 @@ INSERT INTO university.subject (title) VALUES ('Математика'),
                                               ('Английский язык'),
                                               ('Физ-ра'),
                                               ('Информатика');
+
+INSERT INTO university.degree_education (id, degree) VALUES (1, 'бакалавриат');
